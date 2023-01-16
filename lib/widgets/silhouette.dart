@@ -1,0 +1,1 @@
+/// The patient silhouette itself

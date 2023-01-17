@@ -14,10 +14,11 @@ class _PatientInfoScreenState extends State<PatientInfoScreen> {
         child: Scaffold(
           appBar: const NavBar(
           color: Colors.blue,
+        ),
           body: Container(
             child: Text('Hello World'),
-          ),
-      ),
-    ));
+        ),
+      )
+    );
   }
 }

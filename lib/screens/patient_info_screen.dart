@@ -12,8 +12,11 @@ class _PatientInfoScreenState extends State<PatientInfoScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      appBar: const NavBar(
-        color: Colors.blue,
+          appBar: const NavBar(
+          color: Colors.blue,
+          body: Container(
+            child: Text('Hello World'),
+          ),
       ),
     ));
   }

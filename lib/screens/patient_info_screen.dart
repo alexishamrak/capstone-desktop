@@ -69,7 +69,7 @@ class _PatientInfoScreenState extends State<PatientInfoScreen> {
                   ), //Row
                 ), //Padding
 
-                MySeparator(
+                DashedSeparator(
                   color: Colors.grey.withOpacity(0.5),
                 ),
 
@@ -137,7 +137,7 @@ class _PatientInfoScreenState extends State<PatientInfoScreen> {
                   ), //Row
                 ), //Padding
 
-                MySeparator(
+                DashedSeparator(
                   color: Colors.grey.withOpacity(0.5),
                 ),
 
@@ -148,7 +148,7 @@ class _PatientInfoScreenState extends State<PatientInfoScreen> {
                   width: 800.0,
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.pushReplacement(
+                      Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => EditInfoScreen()),
                       );
@@ -159,7 +159,7 @@ class _PatientInfoScreenState extends State<PatientInfoScreen> {
 
                 SizedBox(height: 25.0),
 
-                MySeparator(
+                DashedSeparator(
                   color: Colors.grey.withOpacity(0.5),
                 ),
 

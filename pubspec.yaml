@@ -76,13 +76,13 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-  - family: Bitter
-    fonts:
-      - asset: fonts/Bitter-VariableFont_wght.ttf
+    - family: Bitter
+      fonts:
+        - asset: fonts/Bitter-VariableFont_wght.ttf
 
-  - family: Merriweather
-    fonts:
-      - asset: fonts/Merriweather-Regular.ttf
+    - family: Merriweather
+      fonts:
+        - asset: fonts/Merriweather-Regular.ttf
 
   #
   # For details regarding fonts from package dependencies,

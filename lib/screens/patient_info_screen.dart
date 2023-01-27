@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../widgets/nav_bar.dart';
 import '../widgets/dashed_separator.dart';
-import './edit_info_screen.dart';
 
 class PatientInfoScreen extends StatefulWidget {
   @override
@@ -25,7 +24,7 @@ class _PatientInfoScreenState extends State<PatientInfoScreen> {
                   child: Row(
                     children: <Widget>[
                       Text(
-                        'John Doe',
+                        'Ramirez Santos',
                         style: TextStyle(
                           letterSpacing: 1.5,
                           fontSize: 48.0,
@@ -42,7 +41,39 @@ class _PatientInfoScreenState extends State<PatientInfoScreen> {
                   child: Row(
                     children: <Widget>[
                       Text(
-                        'Age: XX',
+                        'Age: 67',
+                        style: TextStyle(
+                          fontSize: 24.0,
+                          //fontWeight: FontWeight.bold,
+                          fontFamily: 'Merriweather',
+                        ), //TextStyle
+                      ), //Text
+                    ], //<Widget>[]
+                  ), //Row
+                ), //Padding
+
+                Padding(
+                  padding: EdgeInsets.fromLTRB(8.0, 2.0, 8.0, 2.0),
+                  child: Row(
+                    children: <Widget>[
+                      Text(
+                        'Admitted: 28/01/2023',
+                        style: TextStyle(
+                          fontSize: 24.0,
+                          //fontWeight: FontWeight.bold,
+                          fontFamily: 'Merriweather',
+                        ), //TextStyle
+                      ), //Text
+                    ], //<Widget>[]
+                  ), //Row
+                ), //Padding
+
+                Padding(
+                  padding: EdgeInsets.fromLTRB(8.0, 2.0, 8.0, 2.0),
+                  child: Row(
+                    children: <Widget>[
+                      Text(
+                        'Hand Dominance: Right',
                         style: TextStyle(
                           fontSize: 24.0,
                           //fontWeight: FontWeight.bold,
@@ -58,7 +89,7 @@ class _PatientInfoScreenState extends State<PatientInfoScreen> {
                   child: Row(
                     children: <Widget>[
                       Text(
-                        'Admitted: DD/MM/YYYY',
+                        'Weight: 77kg',
                         style: TextStyle(
                           fontSize: 24.0,
                           //fontWeight: FontWeight.bold,
@@ -95,7 +126,7 @@ class _PatientInfoScreenState extends State<PatientInfoScreen> {
                             SizedBox(height: 8.0),
 
                             Text(
-                              '\u2022 Blood Thinner ABC',
+                              '\u2022 Thrombolytic (tPA)\n\u2022 Acetylsalicyclic Acid, Aspirin\n\u2022 Benazepril(Lotensin)',
                               style: TextStyle(
                                 fontSize: 18.0,
                                 fontFamily: 'Merriweather',
@@ -113,7 +144,7 @@ class _PatientInfoScreenState extends State<PatientInfoScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Text(
-                              'Other Medical Diagnoses:',
+                              'Stroke Information:',
                               style: TextStyle(
                                 fontSize: 24.0,
                                 fontWeight: FontWeight.bold,
@@ -124,7 +155,7 @@ class _PatientInfoScreenState extends State<PatientInfoScreen> {
                             SizedBox(height: 8.0),
 
                             Text(
-                              '\u2022 XYZ',
+                              '\u2022 ARAT Score: 18 (Right Arm), 53 (Left Arm)\n\u2022 NIHSS Score: 12\n\u2022 Previous stroke in 2019',
                               style: TextStyle(
                                 fontSize: 18.0,
                                 fontFamily: 'Merriweather',
@@ -141,27 +172,27 @@ class _PatientInfoScreenState extends State<PatientInfoScreen> {
                   color: Colors.grey.withOpacity(0.5),
                 ),
 
-                SizedBox(height: 25.0),
+              //   SizedBox(height: 25.0),
 
-                SizedBox(
-                  height: 30.0,
-                  width: 800.0,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => EditInfoScreen()),
-                      );
-              },
-                    child: Text('Edit'),
-                  ),
-                ),
+              //   SizedBox(
+              //     height: 30.0,
+              //     width: 800.0,
+              //     child: ElevatedButton(
+              //       onPressed: () {
+              //         // Navigator.push(
+              //         //   context,
+              //         //   MaterialPageRoute(builder: (context) => EditInfoScreen()),
+              //         // );
+              // },
+              //       child: Text('Edit'),
+              //     ),
+              //   ),
 
-                SizedBox(height: 25.0),
+              //   SizedBox(height: 25.0),
 
-                DashedSeparator(
-                  color: Colors.grey.withOpacity(0.5),
-                ),
+              //   DashedSeparator(
+              //     color: Colors.grey.withOpacity(0.5),
+              //   ),
 
               ], //<Widget>[]
             ), //Column

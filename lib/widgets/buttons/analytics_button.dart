@@ -11,11 +11,12 @@ class AnalyticsButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final VoidCallback? onPressed = enabled
         ? () {
-            Navigator.push(
-              //check if should be pushReplacement
-              context,
-              MaterialPageRoute(builder: (context) => AnalyticsScreen()),
-            );
+            Navigator.pushNamed(
+                //check if should be pushReplacement
+                context,
+                '/analytics'
+                // MaterialPageRoute(builder: (context) => const AnalyticsScreen()),
+                );
           }
         : null;
     if (enabled) {

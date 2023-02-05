@@ -4,7 +4,7 @@ import '../widgets/nav_bar.dart';
 
 class LandingPage extends StatefulWidget {
   const LandingPage({super.key, required this.title});
-  //static const routeName = '/'; //route name for landing page
+  static const routeName = '/'; //route name for landing page
 
   final String title;
 
@@ -17,7 +17,7 @@ class _LandingPageState extends State<LandingPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: const NavBar(
+        appBar: NavBar(
           color: Colors.blue,
         ),
         body: Row(

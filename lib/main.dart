@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'screens/landing_page.dart';
+import 'screens/analytics_screen.dart';
+import 'screens/edit_info_screen.dart';
+import 'screens/patient_info_screen.dart';
 
 //import 'providers/aws_provider.dart';
 
@@ -37,21 +40,23 @@ class _MyAppState extends State<MyApp> {
       )
           // useMaterial3: true,
           ),
-      home: const LandingPage(title: 'JEJARD Desktop'),
+
+      // home: const LandingPage(title: 'JEJARD Desktop'),
       //replace line above with the following
-      /** 
-       * initialRoute: '/', //main page title
-       * routes{
-       * '/': (ctx) => LandingPage(), //landing page is main screen of app
-       * AnalyticsScreen.routeName: (ctx) => AnalyticsScreen(), //route for analytics page
-       * PatientInfoScreen.routeName: (ctx) => PatientInfoScreen(),
-       * EditInfoScreen.routeName: (ctx) => EditInfoScreen(),
-       * },
-       * onGenerateRoute: (routeSettings){
-       * //send arguments to analytics screen when the page is rendered; arguments inside "routeSettings"
-       * return MaterialPageRoute(builder: (ctx) => AnalyticsScreen());
-       * }
-      */
+
+      initialRoute: '/', //main page title
+      routes: {
+        '/': (ctx) => const LandingPage(
+              title: 'JEJARD Desktop',
+            ), //landing page is main screen of app
+        AnalyticsScreen.routeName: (ctx) =>
+            const AnalyticsScreen(), //route for analytics page
+        // PatientInfoScreen.routeName: (ctx) => PatientInfoScreen(),
+      },
+      // onGenerateRoute: (routeSettings) {
+      //   //send arguments to analytics screen when the page is rendered; arguments inside "routeSettings"
+      //   return MaterialPageRoute(builder: (ctx) => AnalyticsScreen());
+      // },
     );
   }
 }

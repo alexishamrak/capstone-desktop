@@ -4,7 +4,7 @@ import '../widgets/nav_bar.dart';
 
 class AnalyticsScreen extends StatefulWidget {
   const AnalyticsScreen({super.key});
-  //static const routeName
+  static const routeName = '/analytics';
 
   @override
   _AnalyticsScreenState createState() => _AnalyticsScreenState();

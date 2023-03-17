@@ -50,6 +50,7 @@ class _SensorWidgetState extends State<SensorWidget> {
           ),
           AnalyticsButton(
             enabled: widget.isConnected,
+            limb: widget.limbName,
           ), //if statement: if not connected, set enabled to false, else set enable to true and show analytics
           //need some sort of status determining function
         ],

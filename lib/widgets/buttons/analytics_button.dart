@@ -22,41 +22,43 @@ class AnalyticsButton extends StatelessWidget {
         ? () {
             if (limb == "Right Arm") {
               try {
-                Sensor s = context
-                    .read<AWSProvider>()
-                    .sensors
-                    .firstWhere((element) => element.sensorId == "RA");
-                var id = s.sensorId;
-                var xValue = s.x.toString();
-                var yValue = s.y.toString();
-                var zValue = s.z.toString();
-                print('$xValue $yValue $zValue');
-                context.pushNamed('analytics', queryParams: {
-                  'id': id,
-                  'x': xValue,
-                  'y': yValue,
-                  'z': zValue,
-                });
+                // Sensor s = context
+                //     .read<AWSProvider>()
+                //     .sensors
+                //     .firstWhere((element) => element.sensorId == "RA");
+                // var id = s.sensorId;
+                // var xValue = s.x.toString();
+                // var yValue = s.y.toString();
+                // var zValue = s.z.toString();
+                // print('$xValue $yValue $zValue');
+                // context.pushNamed('analytics', queryParams: {
+                //   'side': id,
+                //   'x': xValue,
+                //   'y': yValue,
+                //   'z': zValue,
+                // });
+                context.pushNamed('analytics');
               } catch (e) {
                 null;
               }
             } else if (limb == "Left Arm") {
               try {
-                Sensor s = context
-                    .read<AWSProvider>()
-                    .sensors
-                    .firstWhere((element) => element.sensorId == "LA");
-                var id = s.sensorId;
-                var xValue = s.x.toString();
-                var yValue = s.y.toString();
-                var zValue = s.z.toString();
-                print('$xValue $yValue $zValue');
-                context.pushNamed('analytics', queryParams: {
-                  'id': id,
-                  'x': xValue,
-                  'y': yValue,
-                  'z': zValue,
-                });
+                // Sensor s = context
+                //     .read<AWSProvider>()
+                //     .sensors
+                //     .firstWhere((element) => element.sensorId == "LA");
+                // var id = s.sensorId;
+                // var xValue = s.x.toString();
+                // var yValue = s.y.toString();
+                // var zValue = s.z.toString();
+                // print('$xValue $yValue $zValue');
+                // context.pushNamed('analytics', queryParams: {
+                //   'id': id,
+                //   'x': xValue,
+                //   'y': yValue,
+                //   'z': zValue,
+                // });
+                context.pushNamed('analytics');
                 // context.go('/analytics/:$id:$xValue:$yValue:$zValue');
               } catch (e) {
                 null;

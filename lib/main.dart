@@ -51,12 +51,7 @@ class _MyAppState extends State<MyApp> {
                   name: 'analytics',
                   path: 'analytics',
                   builder: (BuildContext context, GoRouterState state) {
-                    return AnalyticsScreen(
-                      id: state.queryParams['id']!,
-                      x_data: state.queryParams['x']!,
-                      y_data: state.queryParams['y']!,
-                      z_data: state.queryParams['z']!,
-                    );
+                    return AnalyticsScreen();
                   },
                 ),
               ]),

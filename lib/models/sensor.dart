@@ -27,10 +27,10 @@ class Sensor {
   int determineThreshold(double x, double y, double z) {
     double value = sqrt(pow(x, 2) + pow(y, 2) + pow(z, 2));
     print(value);
-    if (value <= 1.9) {
+    if (value <= 1.2) {
       //limb not moving much, display red
       return 1;
-    } else if (value >= 1.9 && value < 3) {
+    } else if (value >= 1.2 && value < 2.5) {
       //limb moving a good amount, display yellow
       return 2;
     } else {

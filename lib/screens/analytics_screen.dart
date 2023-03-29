@@ -9,13 +9,12 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 import 'dart:async';
 import 'dart:math' as math;
 
-//private class will need to identify a listener
+// Based on the example in: https://github.com/SyncfusionExamples/how-to-create-a-real-time-flutter-chart-in-10-minutes/blob/main/lib/main.dart
 
 class AnalyticsScreen extends StatefulWidget {
-  AnalyticsScreen({
+  const AnalyticsScreen({
     super.key,
   });
-  // static const routeName = '/analytics';
 
   @override
   State<AnalyticsScreen> createState() => _AnalyticsScreenState();
@@ -27,19 +26,6 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
   late List<SensorData> chartDataRight;
   late ChartSeriesController _chartSeriesControllerRight;
   late AWSProvider sensordata;
-  // late String sensorId;
-  // late double timestamp;
-  // late double x;
-  // late double y;
-  // late double z;
-
-  // _AnalyticsScreenState({
-  //   this.sensorId = '',
-  //   this.timestamp = 0.0,
-  //   this.x = 0.0,
-  //   this.y = 0.0,
-  //   this.z = 0.0,
-  // });
 
   @override
   void initState() {
@@ -48,18 +34,6 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
     // Timer.periodic(const Duration(seconds: 1), updateDataSource);
     super.initState();
   }
-
-  // @override
-  // void didChangeDependencies() {
-  //   // final routeArgs =
-  //   //     ModalRoute.of(context)?.settings.arguments as Map<String, Object>;
-  //   // sensorId = routeArgs['sensor_id'] as String;
-  //   // timestamp = routeArgs['timestamp_s'] as double;
-  //   // x = routeArgs['x'] as double;
-  //   // y = routeArgs['y'] as double;
-  //   // z = routeArgs['z'] as double;
-  //   super.didChangeDependencies();
-  // }
 
   List<SensorData> getChartDataLeft() {
     return <SensorData>[
@@ -94,8 +68,8 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
   @override
   Widget build(BuildContext context) {
     sensordata = Provider.of<AWSProvider>(context);
-    print('X data:  ${sensordata.findByName('LA')!.x}');
-    print('Chart data: ${chartDataLeft[0].x}');
+    // print('X data:  ${sensordata.findByName('LA')!.x}');
+    // print('Chart data: ${chartDataLeft[0].x}');
     updateChartDataLeft();
     updateChartDataRight();
 
@@ -174,9 +148,9 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
                 LineSeries<SensorData, int>(
                   name: 'Y Data',
                   onRendererCreated: (ChartSeriesController controller) {
-                    _chartSeriesControllerLeft = controller;
+                    _chartSeriesControllerRight = controller;
                   },
-                  dataSource: chartDataLeft,
+                  dataSource: chartDataRight,
                   color: const Color.fromARGB(255, 47, 151, 186),
                   xValueMapper: (SensorData sensor, _) => sensor.time,
                   yValueMapper: (SensorData sensor, _) => sensor.y,
@@ -185,9 +159,9 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
                 LineSeries<SensorData, int>(
                   name: 'Z Data',
                   onRendererCreated: (ChartSeriesController controller) {
-                    _chartSeriesControllerLeft = controller;
+                    _chartSeriesControllerRight = controller;
                   },
-                  dataSource: chartDataLeft,
+                  dataSource: chartDataRight,
                   color: const Color.fromARGB(255, 105, 78, 184),
                   xValueMapper: (SensorData sensor, _) => sensor.time,
                   yValueMapper: (SensorData sensor, _) => sensor.z,
@@ -265,27 +239,3 @@ class SensorData {
   final double y;
   final double z;
 }
-
-
-
-// class _MyHomePageState extends State<MyHomePage> {
-//   late List<LiveData> chartData;
-//   late ChartSeriesController _chartSeriesController;
-
-//   @override
-//   void initState() {
-//     chartData = getChartData();
-//     Timer.periodic(const Duration(seconds: 1), updateDataSource);
-//     super.initState();
-//   }
-
-//formerly build
-
-//   int time = 19;
-//   void updateDataSource(Timer timer) {
-//     chartData.add(LiveData(time++, (math.Random().nextInt(60) + 30)));
-//     chartData.removeAt(0);
-//     _chartSeriesController.updateDataSource(
-//         addedDataIndex: chartData.length - 1, removedDataIndex: 0);
-//   }
-// }

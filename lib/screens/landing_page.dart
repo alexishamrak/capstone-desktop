@@ -27,7 +27,7 @@ class _LandingPageState extends State<LandingPage> {
     final sensorData = Provider.of<AWSProvider>(context);
     //have a provider so the page updates
     // print('updating widget landing page');
-    print(sensorData.isStreaming.toString());
+    // print(sensorData.isStreaming.toString());
 
     return SafeArea(
         child: (!sensorData.stream && !sensorData.hasData) ||
@@ -115,15 +115,10 @@ class _LandingPageState extends State<LandingPage> {
                               ),
                             )),
                     Padding(
-                      padding: EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(8.0),
                       child: Image(
-                        image: sensorData.findByName("LA")!.img,
-                        // image: AssetImage(
-                        //   'assets/images/silhouette.png',
-                        // ),
-                        // image:
-                        // sensorData
-                        //     .chooseImage(), //choose image based on current threshold
+                        image: sensorData.person.img,
+                        // image: sensorData.findByName("LA")!.img,
                         height: double.infinity,
                       ),
                     ),

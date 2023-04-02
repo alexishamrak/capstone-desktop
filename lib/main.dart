@@ -77,6 +77,7 @@ class _MyAppState extends State<MyApp> {
     return ChangeNotifierProvider<AWSProvider>(
       create: (_) => AWSProvider(),
       child: MaterialApp.router(
+        debugShowCheckedModeBanner: false,
         title: 'JEJARD Desktop',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSwatch(

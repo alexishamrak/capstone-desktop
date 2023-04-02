@@ -19,7 +19,14 @@ git clone https://github.com/alexishamrak/capstone-desktop.git
 * Inside the 'assets' folder, include a folder to store all your AWS certifications and keys
 * Add a "keys.dart" file, where you will need to include the following information:
 
-    `const String awsServerKey = '<pathToServerKey>';\nconst String clientId = '<nameOfClient>';\nconst String rootFile = '<pathToAWSrootFile>';\nconst String cert = '<pathToCertificationFile>';\nconst String pKey = '<pathToPrivateKeyFile>';\nconst String topicName = '<topicName>';`
+```
+const String awsServerKey = '<pathToServerKey>';
+const String clientId = '<nameOfClient>';
+const String rootFile = '<pathToAWSrootFile>';
+const String cert = '<pathToCertificationFile>';
+const String pKey = '<pathToPrivateKeyFile>';
+const String topicName = '<topicName>';
+```
 * To run the application, go to the 'main.dart' folder and run from there.
 
 At the advice of Flutter, 

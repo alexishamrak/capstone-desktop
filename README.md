@@ -30,6 +30,7 @@ const String topicName = '<topicName>';
 * To run the application, go to the 'main.dart' folder and run from there.
 
 At the advice of Flutter, 
+
     For help getting started with Flutter development, view the
     [online documentation](https://docs.flutter.dev/), which offers tutorials,
     samples, guidance on mobile development, and a full API reference.

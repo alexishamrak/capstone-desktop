@@ -13,7 +13,7 @@ This app has been converted into an app package that is not included in the repo
 * Clone this repository 
     `git clone https://github.com/alexishamrak/capstone-desktop.git`
 * Sign up and initialize AWS' IoT Core
-* * Complete set up on server end of application 
+    * Complete set up on server end of application 
 * Inside the 'assets' folder, include a folder to store all your AWS certifications and keys
 * Add a "keys.dart" file, where you will need to include the following information:
 

@@ -25,9 +25,7 @@ class _LandingPageState extends State<LandingPage> {
   @override
   Widget build(BuildContext context) {
     final sensorData = Provider.of<AWSProvider>(context);
-    //have a provider so the page updates
-    // print('updating widget landing page');
-    // print(sensorData.isStreaming.toString());
+    //page updates when this provider updates
 
     return SafeArea(
         child: (!sensorData.stream && !sensorData.hasData) ||
@@ -48,10 +46,6 @@ class _LandingPageState extends State<LandingPage> {
                             limbName: 'Left Arm',
                             isConnected: false,
                           ),
-                          // SensorWidget(
-                          //   limbName: 'Left Leg',
-                          //   isConnected: false,
-                          // ),
                         ],
                       ),
                     ),
@@ -62,7 +56,6 @@ class _LandingPageState extends State<LandingPage> {
                           'assets/images/silhouette.png',
                         ),
                         height: double.infinity,
-                        // Icon(Icons.person),
                       ),
                     ),
                     Padding(
@@ -74,10 +67,6 @@ class _LandingPageState extends State<LandingPage> {
                               limbName: 'Right Arm',
                               isConnected: false,
                             ),
-                            // SensorWidget(
-                            //   limbName: 'Right Leg',
-                            //   isConnected: false,
-                            // ),
                           ]),
                     ),
                   ],
@@ -104,12 +93,8 @@ class _LandingPageState extends State<LandingPage> {
                                       limbName: 'Left Arm',
                                       isConnected: sensorData
                                           .findByName("LA")!
-                                          .isConnected, //CHECK THIS LATER!!! ****
+                                          .isConnected,
                                     ),
-                                    // SensorWidget(
-                                    //   limbName: 'Left Leg',
-                                    //   isConnected: false,
-                                    // ),
                                   ],
                                 ),
                               ),
@@ -118,7 +103,6 @@ class _LandingPageState extends State<LandingPage> {
                       padding: const EdgeInsets.all(8.0),
                       child: Image(
                         image: sensorData.person.img,
-                        // image: sensorData.findByName("LA")!.img,
                         height: double.infinity,
                       ),
                     ),
@@ -129,14 +113,9 @@ class _LandingPageState extends State<LandingPage> {
                           children: <Widget>[
                             SensorWidget(
                               limbName: 'Right Arm',
-                              isConnected: sensorData
-                                  .findByName("RA")!
-                                  .isConnected, //check later!!!!*****
+                              isConnected:
+                                  sensorData.findByName("RA")!.isConnected,
                             ),
-                            // SensorWidget(
-                            //   limbName: 'Right Leg',
-                            //   isConnected: true,
-                            // ),
                           ]),
                     ),
                   ],

@@ -23,10 +23,8 @@ class Sensor {
     this.isConnected = false,
   });
 
-  //TODO: input correct threshold values
   int determineThreshold(double x, double y, double z) {
     double value = sqrt(pow(x, 2) + pow(y, 2) + pow(z, 2));
-    print(value);
     if (value <= 1.2) {
       //limb not moving much, display red
       return 1;

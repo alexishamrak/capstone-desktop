@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jejard_desktop/providers/aws_provider.dart';
-import 'package:jejard_desktop/screens/landing_page.dart';
 import 'package:provider/provider.dart';
 
 class RunButton extends StatelessWidget {
@@ -11,7 +10,8 @@ class RunButton extends StatelessWidget {
   final double width;
   final double height;
 
-  RunButton({
+  const RunButton({
+    super.key,
     required this.text,
     required this.buttonColor,
     required this.textColor,
@@ -37,12 +37,6 @@ class RunButton extends StatelessWidget {
         ),
         onPressed: () {
           context.pushReplacement('/landing');
-          // Navigator.pushReplacement(
-          //   context,
-          //   MaterialPageRoute(
-          //       builder: (context) =>
-          //           const LandingPage(title: 'JEJARD Desktop')),
-          // );
           client.connectAWS();
         },
         child: Text(

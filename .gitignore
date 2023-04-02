@@ -45,3 +45,4 @@ app.*.map.json
 
 #Licenses for AWS
 /assets/mqtt
+/lib/keys.dart

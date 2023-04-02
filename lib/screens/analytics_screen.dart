@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../models/sensor.dart';
@@ -67,125 +68,133 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // print('Analytics screen now');
     sensordata = Provider.of<AWSProvider>(context);
-    // print('X data:  ${sensordata.findByName('LA')!.x}');
-    // print('Chart data: ${chartDataLeft[0].x}');
-    updateChartDataLeft();
-    updateChartDataRight();
+    if (sensordata.stream == false && sensordata.hasData == false) {
+      Future.delayed(Duration.zero, () async {
+        try {
+          context.pop();
+        } catch (e) {}
+      });
+      return const Scaffold();
+    } else {
+      updateChartDataLeft();
+      updateChartDataRight();
 
-    return SafeArea(
-      child: Scaffold(
-        appBar: const NavBar(
-          color: Colors.blue,
+      return SafeArea(
+        child: Scaffold(
+          appBar: const NavBar(
+            color: Colors.blue,
+          ),
+          body: Column(children: <Widget>[
+            Expanded(
+              child: SfCartesianChart(
+                series: <LineSeries<SensorData, int>>[
+                  LineSeries<SensorData, int>(
+                    name: 'X Data',
+                    onRendererCreated: (ChartSeriesController controller) {
+                      _chartSeriesControllerLeft = controller;
+                    },
+                    dataSource: chartDataLeft,
+                    color: const Color.fromRGBO(192, 108, 132, 1),
+                    xValueMapper: (SensorData sensor, _) => sensor.time,
+                    yValueMapper: (SensorData sensor, _) => sensor.x,
+                    width: 2,
+                  ),
+                  LineSeries<SensorData, int>(
+                    name: 'Y Data',
+                    onRendererCreated: (ChartSeriesController controller) {
+                      _chartSeriesControllerLeft = controller;
+                    },
+                    dataSource: chartDataLeft,
+                    color: const Color.fromARGB(255, 47, 151, 186),
+                    xValueMapper: (SensorData sensor, _) => sensor.time,
+                    yValueMapper: (SensorData sensor, _) => sensor.y,
+                    width: 2,
+                  ),
+                  LineSeries<SensorData, int>(
+                    name: 'Z Data',
+                    onRendererCreated: (ChartSeriesController controller) {
+                      _chartSeriesControllerLeft = controller;
+                    },
+                    dataSource: chartDataLeft,
+                    color: const Color.fromARGB(255, 105, 78, 184),
+                    xValueMapper: (SensorData sensor, _) => sensor.time,
+                    yValueMapper: (SensorData sensor, _) => sensor.z,
+                    width: 2,
+                  )
+                ],
+                title: ChartTitle(text: 'Left Arm'),
+                legend: Legend(isVisible: true),
+                primaryXAxis: NumericAxis(
+                    majorGridLines: const MajorGridLines(width: 1),
+                    edgeLabelPlacement: EdgeLabelPlacement.shift,
+                    interval: 2,
+                    title: AxisTitle(text: 'Time (seconds)')),
+                primaryYAxis: NumericAxis(
+                  axisLine: const AxisLine(width: 0),
+                  majorTickLines: const MajorTickLines(size: 2),
+                  majorGridLines: const MajorGridLines(width: 1),
+                  title: AxisTitle(text: 'Acceleration (m/s^2)'),
+                ),
+              ),
+            ),
+            Expanded(
+              child: SfCartesianChart(
+                series: <LineSeries<SensorData, int>>[
+                  LineSeries<SensorData, int>(
+                    name: 'X Data',
+                    onRendererCreated: (ChartSeriesController controller) {
+                      _chartSeriesControllerRight = controller;
+                    },
+                    dataSource: chartDataRight,
+                    color: const Color.fromRGBO(192, 108, 132, 1),
+                    xValueMapper: (SensorData sensor, _) => sensor.time,
+                    yValueMapper: (SensorData sensor, _) => sensor.x,
+                    width: 2,
+                  ),
+                  LineSeries<SensorData, int>(
+                    name: 'Y Data',
+                    onRendererCreated: (ChartSeriesController controller) {
+                      _chartSeriesControllerRight = controller;
+                    },
+                    dataSource: chartDataRight,
+                    color: const Color.fromARGB(255, 47, 151, 186),
+                    xValueMapper: (SensorData sensor, _) => sensor.time,
+                    yValueMapper: (SensorData sensor, _) => sensor.y,
+                    width: 2,
+                  ),
+                  LineSeries<SensorData, int>(
+                    name: 'Z Data',
+                    onRendererCreated: (ChartSeriesController controller) {
+                      _chartSeriesControllerRight = controller;
+                    },
+                    dataSource: chartDataRight,
+                    color: const Color.fromARGB(255, 105, 78, 184),
+                    xValueMapper: (SensorData sensor, _) => sensor.time,
+                    yValueMapper: (SensorData sensor, _) => sensor.z,
+                    width: 2,
+                  ),
+                ],
+                title: ChartTitle(text: 'Right Arm'),
+                legend: Legend(isVisible: true),
+                primaryXAxis: NumericAxis(
+                    majorGridLines: const MajorGridLines(width: 1),
+                    edgeLabelPlacement: EdgeLabelPlacement.shift,
+                    interval: 2,
+                    title: AxisTitle(text: 'Time (seconds)')),
+                primaryYAxis: NumericAxis(
+                  axisLine: const AxisLine(width: 0),
+                  majorTickLines: const MajorTickLines(size: 2),
+                  majorGridLines: const MajorGridLines(width: 1),
+                  title: AxisTitle(text: 'Acceleration (m/s^2)'),
+                ),
+              ),
+            ),
+          ]),
         ),
-        body: Column(children: <Widget>[
-          Expanded(
-            child: SfCartesianChart(
-              series: <LineSeries<SensorData, int>>[
-                LineSeries<SensorData, int>(
-                  name: 'X Data',
-                  onRendererCreated: (ChartSeriesController controller) {
-                    _chartSeriesControllerLeft = controller;
-                  },
-                  dataSource: chartDataLeft,
-                  color: const Color.fromRGBO(192, 108, 132, 1),
-                  xValueMapper: (SensorData sensor, _) => sensor.time,
-                  yValueMapper: (SensorData sensor, _) => sensor.x,
-                  width: 2,
-                ),
-                LineSeries<SensorData, int>(
-                  name: 'Y Data',
-                  onRendererCreated: (ChartSeriesController controller) {
-                    _chartSeriesControllerLeft = controller;
-                  },
-                  dataSource: chartDataLeft,
-                  color: const Color.fromARGB(255, 47, 151, 186),
-                  xValueMapper: (SensorData sensor, _) => sensor.time,
-                  yValueMapper: (SensorData sensor, _) => sensor.y,
-                  width: 2,
-                ),
-                LineSeries<SensorData, int>(
-                  name: 'Z Data',
-                  onRendererCreated: (ChartSeriesController controller) {
-                    _chartSeriesControllerLeft = controller;
-                  },
-                  dataSource: chartDataLeft,
-                  color: const Color.fromARGB(255, 105, 78, 184),
-                  xValueMapper: (SensorData sensor, _) => sensor.time,
-                  yValueMapper: (SensorData sensor, _) => sensor.z,
-                  width: 2,
-                )
-              ],
-              title: ChartTitle(text: 'Left Arm'),
-              legend: Legend(isVisible: true),
-              primaryXAxis: NumericAxis(
-                  majorGridLines: const MajorGridLines(width: 1),
-                  edgeLabelPlacement: EdgeLabelPlacement.shift,
-                  interval: 2,
-                  title: AxisTitle(text: 'Time (seconds)')),
-              primaryYAxis: NumericAxis(
-                axisLine: const AxisLine(width: 0),
-                majorTickLines: const MajorTickLines(size: 2),
-                majorGridLines: const MajorGridLines(width: 1),
-                title: AxisTitle(text: 'Acceleration (m/s^2)'),
-              ),
-            ),
-          ),
-          Expanded(
-            child: SfCartesianChart(
-              series: <LineSeries<SensorData, int>>[
-                LineSeries<SensorData, int>(
-                  name: 'X Data',
-                  onRendererCreated: (ChartSeriesController controller) {
-                    _chartSeriesControllerRight = controller;
-                  },
-                  dataSource: chartDataRight,
-                  color: const Color.fromRGBO(192, 108, 132, 1),
-                  xValueMapper: (SensorData sensor, _) => sensor.time,
-                  yValueMapper: (SensorData sensor, _) => sensor.x,
-                  width: 2,
-                ),
-                LineSeries<SensorData, int>(
-                  name: 'Y Data',
-                  onRendererCreated: (ChartSeriesController controller) {
-                    _chartSeriesControllerRight = controller;
-                  },
-                  dataSource: chartDataRight,
-                  color: const Color.fromARGB(255, 47, 151, 186),
-                  xValueMapper: (SensorData sensor, _) => sensor.time,
-                  yValueMapper: (SensorData sensor, _) => sensor.y,
-                  width: 2,
-                ),
-                LineSeries<SensorData, int>(
-                  name: 'Z Data',
-                  onRendererCreated: (ChartSeriesController controller) {
-                    _chartSeriesControllerRight = controller;
-                  },
-                  dataSource: chartDataRight,
-                  color: const Color.fromARGB(255, 105, 78, 184),
-                  xValueMapper: (SensorData sensor, _) => sensor.time,
-                  yValueMapper: (SensorData sensor, _) => sensor.z,
-                  width: 2,
-                ),
-              ],
-              title: ChartTitle(text: 'Right Arm'),
-              legend: Legend(isVisible: true),
-              primaryXAxis: NumericAxis(
-                  majorGridLines: const MajorGridLines(width: 1),
-                  edgeLabelPlacement: EdgeLabelPlacement.shift,
-                  interval: 2,
-                  title: AxisTitle(text: 'Time (seconds)')),
-              primaryYAxis: NumericAxis(
-                axisLine: const AxisLine(width: 0),
-                majorTickLines: const MajorTickLines(size: 2),
-                majorGridLines: const MajorGridLines(width: 1),
-                title: AxisTitle(text: 'Acceleration (m/s^2)'),
-              ),
-            ),
-          ),
-        ]),
-      ),
-    );
+      );
+    }
   }
 
   void updateChartDataLeft() {

@@ -6,8 +6,6 @@ import '../widgets/buttons/run_button.dart';
 class StartupPage extends StatefulWidget {
   const StartupPage({super.key});
 
-  // static const routeName = '/';
-
   @override
   State<StartupPage> createState() => _StartupPageState();
 }

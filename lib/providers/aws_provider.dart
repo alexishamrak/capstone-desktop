@@ -7,10 +7,10 @@ import 'package:flutter/services.dart';
 import 'package:jejard_desktop/models/silhouette.dart';
 import 'package:mqtt_client/mqtt_server_client.dart';
 import 'package:mqtt_client/mqtt_client.dart';
-// import 'package:csv/csv.dart';
 import 'package:path_provider/path_provider.dart';
 
 import '../models/sensor.dart';
+import '../keys.dart';
 
 class AWSProvider with ChangeNotifier {
   String msgStatus = 'Status';
@@ -22,8 +22,7 @@ class AWSProvider with ChangeNotifier {
   bool hasData = false;
   File rightSensorFile = File('right.csv');
   File leftSensorFile = File('left.csv');
-  TextEditingController idTextController =
-      TextEditingController(); //may delete later
+  TextEditingController idTextController = TextEditingController();
   bool csvTitlesAdded = false;
 
   String topic = 'sensor-data';
@@ -37,10 +36,10 @@ class AWSProvider with ChangeNotifier {
     return _silhouette;
   }
 
-  final MqttServerClient client = MqttServerClient(
-      'a2yj29llu7rbln-ats.iot.ca-central-1.amazonaws.com', '' //AWS server key
-      //second field left blank intentionally
-      );
+  final MqttServerClient client =
+      MqttServerClient(awsServerKey, '' //AWS server key
+          //second field left blank intentionally
+          );
 
   @override
   void dispose() {
@@ -48,7 +47,7 @@ class AWSProvider with ChangeNotifier {
   }
 
   connectAWS() async {
-    String uniqueId = 'jejard-desktop'; //name of the client connecting
+    String uniqueId = clientId; //name of the client connecting
     //insert headers into csv files
     Future localClient = mqttConnect(client, uniqueId);
   }
@@ -74,11 +73,9 @@ class AWSProvider with ChangeNotifier {
       files.writeHeaderLeft();
       files.writeHeaderRight();
     }
-    ByteData rootCA = await rootBundle.load('assets/mqtt/root-CA.crt');
-    ByteData deviceCert = await rootBundle.load(
-        'assets/mqtt/d9704a03ad1d01fa48eb96456b0333ca9525da8252c308d0ba8a08b703e07578-certificate.pem.crt');
-    ByteData privateKey = await rootBundle.load(
-        'assets/mqtt/d9704a03ad1d01fa48eb96456b0333ca9525da8252c308d0ba8a08b703e07578-private.pem.key');
+    ByteData rootCA = await rootBundle.load(rootFile);
+    ByteData deviceCert = await rootBundle.load(cert);
+    ByteData privateKey = await rootBundle.load(pKey);
 
     SecurityContext ctx = SecurityContext.defaultContext;
     ctx.setClientAuthoritiesBytes(rootCA.buffer.asUint8List());
@@ -108,7 +105,7 @@ class AWSProvider with ChangeNotifier {
     }
 
     client.subscribe(
-        'sensor-data', MqttQos.atLeastOnce); //add more if multiple topics exist
+        topicName, MqttQos.atLeastOnce); //add more if multiple topics exist
     //topic is the name of the topic being subscribed to
 
     setStatus('Subscribed');
@@ -127,10 +124,15 @@ class AWSProvider with ChangeNotifier {
           print('<-- START MESSAGE -- $pt -- END -->');
           if (pt.contains("Stream terminating")) {
             stream = false; //stop receiving data
+            _sensors = [];
+            hasData = false;
+            _silhouette.img = const AssetImage('assets/images/silhouette.png');
+            notifyListeners();
             //notifyListeners?? delete _sensor?
             //POTENTIAL ERRORS HERE
+          } else {
+            parseLine(pt); //parse the line
           }
-          parseLine(pt); //parse the line
         } else {
           print('Unknown data');
         }
@@ -194,7 +196,6 @@ class AWSProvider with ChangeNotifier {
       sensorToUpdate.y = double.parse(json['y'].toString().trim());
       sensorToUpdate.z = double.parse(json['z'].toString().trim());
       try {
-        // sensorToUpdate.img = chooseImage();
         _silhouette.img = chooseImage();
       } catch (e) {
         null;
@@ -221,7 +222,6 @@ class AWSProvider with ChangeNotifier {
         z: double.parse(json['z'].toString().trim()),
       );
       try {
-        // newSensor.img = chooseImage();
         _silhouette.img = chooseImage();
       } catch (e) {
         null;
@@ -361,14 +361,10 @@ class FileStorage {
   Future<File> writeLineRight(String line) async {
     final file = await _localFileRight;
     return file.writeAsString('$line\n', mode: FileMode.append);
-    // Write the file
-    // return file.writeAsString('$counter\n', mode: FileMode.append);
   }
 
   Future<File> writeLineLeft(String line) async {
     final file = await _localFileLeft;
     return file.writeAsString('$line\n', mode: FileMode.append);
-    // Write the file
-    // return file.writeAsString('$counter\n', mode: FileMode.append);
   }
 }

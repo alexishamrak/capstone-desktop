@@ -8,7 +8,7 @@ This system provides doctors with a live visualization to help understand how th
 
 ## How to run the desktop application
 
-This app has been converted into an app package that is not included in the repository. To use this repository, you will need to:
+To use this repository, you will need to:
 * Install Flutter and Dart on your desired operating system
 * Clone this repository, 
 ```
